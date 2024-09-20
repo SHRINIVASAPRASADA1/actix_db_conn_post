@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::schema::products;
 use crate::schema::category;
+use crate::schema::users;
+
 use serde_json::Value;
 
 
@@ -37,9 +39,9 @@ pub struct Products {
     pub weight: f32,
     pub height: f32,
     pub is_active: bool,
-    pub tag:Value,      // Use diesel_json::Json
-    pub images: Value,   // Use diesel_json::Json
-    pub features: Value, // Use diesel_json::Json
+    pub tag:Value,      
+    pub images: Value,  
+    pub features: Value, 
 }
 
 
@@ -62,3 +64,29 @@ pub struct ProductsAdd {
     pub images: Value,
     pub features: Value,
 }
+
+
+
+#[derive(Queryable,Serialize,Deserialize)]
+pub struct User {
+   pub id : i32,
+   pub username : String,
+   pub email : String,
+   pub contact : String,
+   pub profile_image : String,
+   pub password : String
+}
+
+
+
+#[derive(AsChangeset,Insertable,Serialize,Deserialize)]
+#[diesel(table_name = users)]
+pub struct UserInsert {
+   pub username : String,
+   pub email : String,
+   pub contact : String,
+   pub profile_image : String,
+   pub password : String
+}
+
+

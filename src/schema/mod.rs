@@ -31,3 +31,14 @@ table! {
     }
  }
  
+
+table! {
+    users(id){
+        id -> Integer,
+        username -> Text,
+        email -> Text ,
+        contact -> Text ,
+        profile_image -> Text ,
+        password -> Text,
+    }
+}

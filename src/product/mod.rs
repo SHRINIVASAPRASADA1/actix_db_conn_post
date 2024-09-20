@@ -83,3 +83,4 @@ async fn category_product(pool: web::Data<DbPool>,ids : web::Path<i32>) -> impl 
     let prod = products.filter(category_id.eq(ids)).load::<Products>(&mut conn).expect("could not load ");
     HttpResponse::Ok().json(prod)
 }
+
