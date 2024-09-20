@@ -73,3 +73,13 @@ pub async fn product_one(
         println!("this function hit");
     HttpResponse::Ok().json(prod)
 }
+
+
+#[get("/category_product/{ids}")]
+async fn category_product(pool: web::Data<DbPool>,ids : web::Path<i32>) -> impl Responder {
+    use self::products::dsl::*;
+    let ids = ids.into_inner();
+    let mut conn = pool.get().expect("Failed To connect to db ");
+    let prod = products.filter(category_id.eq(ids)).load::<Products>(&mut conn).expect("could not load ");
+    HttpResponse::Ok().json(prod)
+}

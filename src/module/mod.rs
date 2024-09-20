@@ -15,7 +15,7 @@ pub struct Category {
 }
 
 #[derive(Insertable,Deserialize,AsChangeset,Debug)]
-#[table_name = "category"]
+#[diesel(table_name = category)]
 pub struct CategoryInsert {
     pub title: String,
     pub subtitle: String,
