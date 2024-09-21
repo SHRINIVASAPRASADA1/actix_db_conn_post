@@ -24,11 +24,10 @@ async fn get_user(pool:web::Data<DbPool>,ids : web::Path<i32>) -> impl Responder
 #[post("/user/login")]
 async fn user_login(pool : web::Data<DbPool>,req_body : web::Json<User>,session : Session) -> impl Responder {
     let data = req_body.into_inner();
-
     println!("{:?}",data.password);
     println!("{:?}",data.username);
     println!("{:?}",data.email);
     println!("{:?}",data.contact);
     let _ = session.insert("user", data.email);
-    HttpResponse::Ok().body("body")
+    HttpResponse::Ok().body("authenticated")
 }

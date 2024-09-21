@@ -42,3 +42,63 @@ table! {
         password -> Text,
     }
 }
+
+
+
+table! {
+    user_address (id) {
+        id -> Integer,
+        user_id -> Integer,
+        pin_code -> Integer,
+        area -> Nullable<Text>,
+        city -> Nullable<Text>,
+        contact -> Nullable<Text>,
+        added_date -> Date,
+        other -> Nullable<Text>,
+    }
+}
+
+table! {
+    user_cart (id) {
+        id -> Integer,
+        user_id -> Integer,
+        product_id -> Integer,
+        quantity -> Nullable<Integer>,
+        added_date -> Date,
+        is_active -> Nullable<Bool>,
+        extra -> Nullable<Jsonb>,
+    }
+}
+
+table! {
+    user_order (id) {
+        id -> Integer,
+        user_id -> Integer,
+        product_id -> Integer,
+        quantity -> Nullable<Integer>,
+        added_date -> Date,
+        is_accepted -> Nullable<Bool>,
+        is_cancelled -> Nullable<Bool>,
+        is_online_pay -> Bool,
+        extra -> Nullable<Jsonb>,
+    }
+}
+
+table! {
+    order_status (id) {
+        id -> Integer,
+        product_id -> Integer,
+        order_id -> Integer,
+        last_updated -> Date,
+        is_accepted -> Nullable<Bool>,
+        locations -> Nullable<Jsonb>,
+    }
+}
+
+
+
+
+
+
+
+

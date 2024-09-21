@@ -2,15 +2,13 @@ mod categories;
 mod module;
 mod product;
 mod schema;
+mod user_cart;
 mod user;
 use crate::categories::*;
 use crate::product::*;
 
 use actix_session::storage::CookieSessionStore;
 use actix_session::SessionMiddleware;
-use actix_web::cookie::Cookie;
-use actix_session::{storage::SessionStore};
-
 use actix_web::cookie::Key;
 use actix_web::{
     web::{self},
@@ -21,6 +19,7 @@ use tables::establish_connection;
 use user::crete_user;
 use user::get_user;
 use user::user_login;
+use user_cart::UserCart;
 
 async fn manual_hello() -> impl Responder {
     HttpResponse::Ok().body("pong!")
@@ -43,7 +42,7 @@ async fn main() -> std::io::Result<()> {
             .service(category_update)
             .service(category_product)
             .service(crete_user)
-            .service(get_user)
+            .service(get_user).service(UserCart)
             .service(user_login)
             .route("/ping", web::get().to(manual_hello))
     })
